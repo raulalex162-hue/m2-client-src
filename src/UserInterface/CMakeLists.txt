@@ -25,6 +25,7 @@ target_link_libraries(UserInterface
 	SpeedTreeLib
 	SphereLib
 	PackLib
+	m2proto
 
 	lzo2
 	libzstd_static

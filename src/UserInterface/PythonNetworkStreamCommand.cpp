@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "PythonNetworkStream.h"
+#include "m2net/ClientNet.h"
 #include "PythonNonPlayer.h"
 #include "AbstractApplication.h"
 #include "AbstractPlayer.h"
@@ -82,7 +83,7 @@ void AppendMonsterList(const CPythonNonPlayer::TMobTableList & c_rMobTableList, 
 
 bool CPythonNetworkStream::ClientCommand(const char * c_szCommand)
 {
-	return false;
+	return m2net::HandleClientCommand(*this, c_szCommand);
 }
 
 bool SplitToken(const char * c_szLine, CTokenVector * pstTokenVector, const char * c_szDelimeter = " ")

@@ -317,6 +317,8 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		// Main Game Phase
 		bool SendC2CPacket(DWORD dwSize, void * pData);
 		bool SendChatPacket(const char * c_szChat, BYTE byType = CHAT_TYPE_TALKING);
+		bool SendSystemMessage(uint16_t system, uint16_t type, const std::string& body); // m2net/ClientNet.cpp
+		bool SendHeartbeatPing();
 		bool SendWhisperPacket(const char * name, const char * c_szChat);
 		bool SendMessengerAddByVIDPacket(DWORD vid);
 		bool SendMessengerAddByNamePacket(const char * c_szName);
@@ -432,6 +434,7 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		bool RecvCharacterUpdatePacketNew();
 		bool RecvCharacterDeletePacket();
 		bool RecvChatPacket();
+		bool RecvSystemPacket(); // m2net/ClientNet.cpp
 		bool RecvOwnerShipPacket();
 		bool RecvSyncPositionPacket();
 		bool RecvWhisperPacket();
