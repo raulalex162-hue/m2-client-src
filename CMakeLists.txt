@@ -71,5 +71,22 @@ include_directories("vendor/freetype-2.13.3/include")
 
 # Add subdirectories for libraries and executables
 add_subdirectory(vendor)
+# --- Protobuf: mesajele sistemelor noi (proto/, aceleasi fisiere ca pe server) ---
+# system = vcpkg (x64-windows-static); vendor = compilat local din vendor/ (inca neimplementat)
+set(M2_PROTOBUF_SOURCE "system" CACHE STRING "De unde vine Protobuf: system sau vendor")
+set_property(CACHE M2_PROTOBUF_SOURCE PROPERTY STRINGS system vendor)
+if (M2_PROTOBUF_SOURCE STREQUAL "system")
+	find_package(Protobuf CONFIG REQUIRED)
+	message(STATUS "Protobuf ${Protobuf_VERSION} (system)")
+elseif (M2_PROTOBUF_SOURCE STREQUAL "vendor")
+	message(FATAL_ERROR "M2_PROTOBUF_SOURCE=vendor nu e inca implementat")
+else()
+	message(FATAL_ERROR "M2_PROTOBUF_SOURCE trebuie sa fie system sau vendor, nu ${M2_PROTOBUF_SOURCE}")
+endif()
+if (NOT COMMAND protobuf_generate)
+	message(FATAL_ERROR "Protobuf gasit, dar fara functia protobuf_generate (versiune prea veche?)")
+endif()
+add_subdirectory(proto)
+
 add_subdirectory(src)
 add_subdirectory(extern)

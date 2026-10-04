@@ -424,6 +424,9 @@ void CPythonNetworkStream::SetGamePhase()
 	rkPlayer.SetMainCharacterIndex(GetMainActorVID());
 
 	__RefreshStatus();
+
+	// Faza 0: verifica la fiecare intrare in joc drumul client -> server -> client.
+	SendHeartbeatPing();
 }
 
 bool CPythonNetworkStream::RecvObserverAddPacket()
